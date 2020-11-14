@@ -36,6 +36,7 @@ const plantList = (state = startingPlantArray, action) => {
 function* rootSaga() {
   yield takeLatest('GET_PLANTS', getPlants);
   yield takeLatest('POST_PLANT', postPlant);
+  yield takeLatest('DELETE_PLANT', deletePlant);
 }
 
 function* getPlants(action) {
@@ -61,6 +62,17 @@ function* postPlant(action) {
     });
   } catch (err) {
     console.log('Error posting plant:', err);
+  }
+}
+
+function* deletePlant(action) {
+  try {
+    yield axios.delete(`/api/plant/${action.payload}`);
+    yield put({
+      type: 'GET_PLANTS',
+    });
+  } catch (err) {
+    console.log('Error deleting plant:', err);
   }
 }
 
