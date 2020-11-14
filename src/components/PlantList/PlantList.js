@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+// CUSTOM COMPONENTS
+import PlantListItem from '../PlantListItem/PlantListItem';
+
 class PlantList extends Component {
   componentDidMount() {
     // use component did mount to dispatch an action to request the plantList from the API
@@ -13,7 +16,11 @@ class PlantList extends Component {
     return (
       <div>
         <h3>This is the plant list</h3>
-        <pre>{JSON.stringify(this.props.reduxState)}</pre>
+        <ul>
+          {this.props.reduxState.plantList.map((item, index) => {
+            return <PlantListItem key={index} plant={item} />;
+          })}
+        </ul>
       </div>
     );
   }
