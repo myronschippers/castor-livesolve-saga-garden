@@ -10,12 +10,39 @@ class PlantDetails extends Component {
   }
 
   render() {
+    const { plantDetails } = this.props.store;
     return (
       <div>
         <h2>Plant Details</h2>
+
+        <div>
+          <p>
+            <strong>Name:</strong> {plantDetails.name}
+          </p>
+          <p>
+            <strong>Kingdom:</strong> {plantDetails.kingdom}
+          </p>
+          <p>
+            <strong>Clade:</strong> {plantDetails.clade}
+          </p>
+          <p>
+            <strong>Order:</strong> {plantDetails.order}
+          </p>
+          <p>
+            <strong>Family:</strong> {plantDetails.family}
+          </p>
+          <p>
+            <strong>Subfamily:</strong> {plantDetails.subfamily}
+          </p>
+          <p>
+            <strong>Genus:</strong> {plantDetails.genus}
+          </p>
+        </div>
       </div>
     );
   }
 }
 
-export default connect()(PlantDetails);
+const mapStoreToProps = (store) => ({ store });
+
+export default connect(mapStoreToProps)(PlantDetails);
