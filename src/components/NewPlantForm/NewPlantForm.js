@@ -30,7 +30,7 @@ class NewPlantForm extends Component {
 
   addNewPlant = (event) => {
     event.preventDefault();
-    this.props.dispatch({ type: 'ADD_PLANT', payload: this.state.newPlant });
+    this.props.dispatch({ type: 'POST_PLANT', payload: this.state.newPlant });
     this.setState({
       newPlant: {
         name: '',
@@ -48,7 +48,6 @@ class NewPlantForm extends Component {
     return (
       <div>
         <h3>This is the form</h3>
-        <pre>{JSON.stringify(this.state)}</pre>
         <form onSubmit={this.addNewPlant}>
           <input
             type="text"

@@ -35,9 +35,10 @@ const plantList = (state = startingPlantArray, action) => {
 
 function* rootSaga() {
   yield takeLatest('GET_PLANTS', getPlants);
+  yield takeLatest('POST_PLANT', postPlant);
 }
 
-function* getPlants() {
+function* getPlants(action) {
   try {
     // make AJAX call to GET plants
     const response = yield axios.get('/api/plant');
@@ -49,6 +50,17 @@ function* getPlants() {
   } catch (err) {
     // surfacing an error message
     console.log('Error getting plants:', err);
+  }
+}
+
+function* postPlant(action) {
+  try {
+    yield axios.post('/api/plant', action.payload);
+    yield put({
+      type: 'GET_PLANTS',
+    });
+  } catch (err) {
+    console.log('Error posting plant:', err);
   }
 }
 
