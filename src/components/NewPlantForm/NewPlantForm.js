@@ -8,7 +8,6 @@ const mapStateToProps = (reduxState) => ({
 class NewPlantForm extends Component {
   state = {
     newPlant: {
-      id: 4,
       name: '',
       kingdom: '',
       clade: '',
@@ -34,8 +33,13 @@ class NewPlantForm extends Component {
     this.props.dispatch({ type: 'ADD_PLANT', payload: this.state.newPlant });
     this.setState({
       newPlant: {
-        id: this.state.newPlant.id + 1,
         name: '',
+        kingdom: '',
+        clade: '',
+        order: '',
+        family: '',
+        subfamily: '',
+        genus: '',
       },
     });
   };
