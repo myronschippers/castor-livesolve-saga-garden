@@ -11,7 +11,7 @@ class PlantListItem extends Component {
   };
 
   handleGoToDetails = (event) => {
-    this.props.history.push('/plant/1');
+    this.props.history.push(`/plant/${this.props.plant.id}`);
   };
 
   render() {
