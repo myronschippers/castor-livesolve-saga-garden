@@ -6,7 +6,7 @@ import logger from 'redux-logger';
 
 // SAGA IMPORTS
 import createSagaMiddleware from 'redux-saga';
-import { takeLatest, put } from 'redux-saga/effects';
+import { takeLatest, put, take } from 'redux-saga/effects';
 import axios from 'axios';
 
 import App from './App';
@@ -47,6 +47,7 @@ function* rootSaga() {
   yield takeLatest('POST_PLANT', postPlant);
   yield takeLatest('DELETE_PLANT', deletePlant);
   yield takeLatest('GET_DETAILS', getDetails);
+  yield takeLatest('PUT_PLANT', putPlantDetails);
 }
 
 function* getPlants(action) {
@@ -96,6 +97,18 @@ function* getDetails(action) {
     });
   } catch (err) {
     console.log('Error getting plant details:', err);
+  }
+}
+
+function* putPlantDetails(action) {
+  try {
+    yield axios.put('/api/plant', action.payload);
+    yield put({
+      type: 'GET_DETAILS',
+      payload: action.payload.id,
+    });
+  } catch (err) {
+    console.log('Error updating plant details:', err);
   }
 }
 
