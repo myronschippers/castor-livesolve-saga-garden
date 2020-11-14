@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class PlantListItem extends Component {
   handleClickDelete = (event) => {
-    console.log('plant:', this.props.plant);
+    this.props.dispatch({
+      type: 'DELETE_PLANT',
+      payload: this.props.plant.id,
+    });
   };
 
   render() {
@@ -15,4 +19,4 @@ class PlantListItem extends Component {
   }
 }
 
-export default PlantListItem;
+export default connect()(PlantListItem);
